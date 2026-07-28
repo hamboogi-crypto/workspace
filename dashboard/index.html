@@ -204,6 +204,55 @@
     color: var(--ink-soft);
   }
 
+  .staff-label {
+    margin: 0;
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  }
+  .staff-list {
+    list-style: none;
+    margin: 6px 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .staff-chip {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .staff-avatar {
+    flex-shrink: 0;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--curtain);
+    color: var(--surface);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+    font-size: 0.66rem;
+    font-weight: 700;
+  }
+  .staff-info { min-width: 0; }
+  .staff-role {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .staff-blurb {
+    display: block;
+    font-size: 0.74rem;
+    color: var(--ink-soft);
+    line-height: 1.4;
+  }
+
   .team-label {
     font-size: 0.72rem;
     color: var(--ink-soft);
@@ -453,8 +502,8 @@
     </div>
   </header>
 
-  <p class="section-label">팀 현황판</p>
-  <section class="teams" aria-label="팀 현황판" id="teamGrid"></section>
+  <p class="section-label">부서 현황판</p>
+  <section class="teams" aria-label="부서 현황판" id="teamGrid"></section>
 
   <p class="section-label">오늘</p>
   <section class="lower">
@@ -491,58 +540,78 @@
     {
       id: "class",
       num: "01",
-      name: "수업준비팀",
+      name: "수업준비부",
       sub: "매주 연기 수업",
       placeholder: "다음 수업 커리큘럼 초안, 사용할 장면/대본, 실습 구조 준비",
+      roles: [
+        { title: "커리큘럼 디자이너", blurb: "프레임워크 근거로 수업 목표와 전체 구조를 설계" },
+        { title: "워밍업 코디네이터", blurb: "본 실습 전 몸과 마음을 여는 워밍업을 구성" },
+        { title: "씬워크 디렉터", blurb: "장면·대본을 고르고 본 실습·다음 수업 연결점을 정리" }
+      ],
       criteria: [
         "Stanislavski / Meisner / Chubbuck / Cicely Berry 중 최소 1개 프레임워크에 근거하지 않으면 반려",
         "“만들어진 목적(objective)”이 아니라 “실제 반응”을 유도하는 구조가 없으면 반려",
         "3시간/특강 등 시간 단위가 명시 안 되면 반려"
       ],
       next: "행복 최종 확인 후 바로 사용",
-      trigger: "수업준비팀으로 다음 주 [대상/레벨] 수업 커리큘럼 짜줘."
+      trigger: "수업준비부로 다음 주 [대상/레벨] 수업 커리큘럼 짜줘."
     },
     {
       id: "alumni",
       num: "02",
-      name: "졸업생 커뮤니티 운영팀",
+      name: "졸업생커뮤니티운영부",
       sub: "단톡방",
       placeholder: "단톡방 최근 대화 흐름 정리, 필요한 공지/이벤트 초안",
+      roles: [
+        { title: "커뮤니티 매니저", blurb: "단톡방 최근 대화 흐름을 정리" },
+        { title: "공지·이벤트 에디터", blurb: "공지·이벤트 초안을 선배 같은 어투로 작성" },
+        { title: "얼럼나이 케어 담당", blurb: "이번 주 챙길 사람을 체크 (개인 근황은 기록하지 않음)" }
+      ],
       criteria: [
         "실제 발송·게시 금지 — 초안까지만",
         "졸업생 개개인 민감한 근황을 요약·기록하지 않는다 (사생활 보호)",
         "톤: 학원장이 아니라 선배/코치 같은 친밀한 어투"
       ],
       next: "행복이 직접 전송",
-      trigger: "졸업생커뮤니티팀으로 이번 주 단톡방 공지 초안 써줘."
+      trigger: "졸업생커뮤니티운영부로 이번 주 단톡방 공지 초안 써줘."
     },
     {
       id: "dev",
       num: "03",
-      name: "개발팀",
+      name: "개발부",
       sub: "배우 이미지 분석 프로그램",
       placeholder: "기능 개발/디버깅/설계 (MediaPipe, OpenFace, wav2vec 등)",
+      roles: [
+        { title: "프로덕트 엔지니어", blurb: "MediaPipe·OpenFace·wav2vec 등 기능을 개발" },
+        { title: "QA·디버깅 담당", blurb: "배포 전 로컬 테스트와 남은 이슈를 정리" },
+        { title: "데이터 거버넌스 담당", blurb: "원본 데이터가 코치 전용을 벗어나지 않도록 관리" }
+      ],
       criteria: [
         "원본 데이터는 코치(행복) 전용 — 외부 유출 경로 설계 금지",
         "절대 점수(absolute score)가 아니라 개인 내 변화 추적(intra-personal progress) 원칙 유지",
         "배포/프로덕션 반영 전 반드시 로컬 테스트 결과 첨부"
       ],
       next: "행복 검토 후 병합",
-      trigger: "개발팀으로 [기능] 관련 코드 봐줘. 배포 전 테스트 결과까지 정리해줘."
+      trigger: "개발부로 [기능] 관련 코드 봐줘. 배포 전 테스트 결과까지 정리해줘."
     },
     {
       id: "workshop",
       num: "04",
-      name: "워크샵 기획·운영팀",
+      name: "워크샵기획운영부",
       sub: "호흡과 발성",
       placeholder: "워크샵 커리큘럼 개발 또는 다음 회차 운영 준비",
+      roles: [
+        { title: "워크샵 커리큘럼 디자이너", blurb: "회차 목표와 드라마테라피 이론적 근거를 설계" },
+        { title: "실습 시퀀서", blurb: "이론 설명 → 바로 체험 순서로 실습을 구성" },
+        { title: "배포자료 제작 담당", blurb: "실습지·체크리스트 등 회차별 결과물을 만든다" }
+      ],
       criteria: [
         "드라마테라피 이론적 근거(Moreno, Winnicott, Laban, Rogers 등) 최소 1개 명시 없으면 반려",
         "실습 순서가 “이론 설명 → 바로 체험”으로 되어 있지 않으면 반려 (설명만 길면 반려)",
         "회차별 결과물(실습지·체크리스트 등)이 없으면 반려"
       ],
       next: "행복 최종 확인",
-      trigger: "워크샵기획팀으로 호흡·발성 워크샵 [N]회차 실습 순서 짜줘."
+      trigger: "워크샵기획운영부로 호흡·발성 워크샵 [N]회차 실습 순서 짜줘."
     }
   ];
 
@@ -591,11 +660,22 @@
       return "<li>" + c + "</li>";
     }).join("");
 
+    var staffHtml = team.roles.map(function (role) {
+      var initials = role.title.split(" ").map(function (w) { return w.charAt(0); }).slice(0, 2).join("");
+      return '<li class="staff-chip">' +
+        '<span class="staff-avatar" aria-hidden="true">' + initials + '</span>' +
+        '<span class="staff-info"><span class="staff-role">' + role.title + '</span>' +
+        '<span class="staff-blurb">' + role.blurb + '</span></span>' +
+      '</li>';
+    }).join("");
+
     card.innerHTML =
       '<div class="team-head">' +
         '<span class="team-num num">' + team.num + '</span>' +
         '<div><h2 class="team-name">' + team.name + '</h2><p class="team-sub">' + team.sub + '</p></div>' +
       '</div>' +
+      '<p class="staff-label">구성원 ' + team.roles.length + '명</p>' +
+      '<ul class="staff-list">' + staffHtml + '</ul>' +
       '<label class="team-label" for="note-' + team.id + '">오늘 할 일</label>' +
       '<textarea class="team-note" id="note-' + team.id + '" rows="2" placeholder="' + team.placeholder + '"></textarea>' +
       '<details class="team-criteria"><summary>반려 기준 (' + team.criteria.length + ')</summary><ul>' + criteriaHtml + '</ul></details>' +
