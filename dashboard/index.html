@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="color-scheme" content="light dark" />
+<title>행복 워크스페이스 — 오늘의 콜시트</title>
+<style>
+  :root {
+    --paper: #efede3;
+    --surface: #fbfaf4;
+    --surface-2: #f2f0e5;
+    --curtain: #2f4c3f;
+    --curtain-deep: #1c2e26;
+    --spotlight: #c97a1f;
+    --ink: #20251f;
+    --ink-soft: #5b6259;
+    --line: #d9d4c4;
+    --shadow: 0 1px 2px rgba(28, 46, 38, 0.06), 0 8px 24px -12px rgba(28, 46, 38, 0.18);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #10140e;
+      --surface: #191f18;
+      --surface-2: #212820;
+      --curtain: #8fbfa2;
+      --curtain-deep: #bfe0cc;
+      --spotlight: #f0ae4e;
+      --ink: #ece9de;
+      --ink-soft: #a3a99b;
+      --line: #2c332b;
+      --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px -12px rgba(0, 0, 0, 0.5);
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #10140e;
+    --surface: #191f18;
+    --surface-2: #212820;
+    --curtain: #8fbfa2;
+    --curtain-deep: #bfe0cc;
+    --spotlight: #f0ae4e;
+    --ink: #ece9de;
+    --ink-soft: #a3a99b;
+    --line: #2c332b;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px -12px rgba(0, 0, 0, 0.5);
+  }
+  :root[data-theme="light"] {
+    --paper: #efede3;
+    --surface: #fbfaf4;
+    --surface-2: #f2f0e5;
+    --curtain: #2f4c3f;
+    --curtain-deep: #1c2e26;
+    --spotlight: #c97a1f;
+    --ink: #20251f;
+    --ink-soft: #5b6259;
+    --line: #d9d4c4;
+    --shadow: 0 1px 2px rgba(28, 46, 38, 0.06), 0 8px 24px -12px rgba(28, 46, 38, 0.18);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .num {
+    font-family: ui-monospace, "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .stage {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: clamp(20px, 4vw, 48px) clamp(16px, 4vw, 32px) 56px;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    background: linear-gradient(165deg, var(--curtain) 0%, var(--curtain-deep) 100%);
+    border-radius: 18px;
+    padding: clamp(24px, 5vw, 40px) clamp(24px, 5vw, 44px);
+    color: var(--surface);
+    box-shadow: var(--shadow);
+    opacity: 0;
+    transform: translateY(8px);
+    animation: rise 0.6s ease-out forwards;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero { opacity: 1; transform: none; animation: none; }
+  }
+  @keyframes rise {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-eyebrow {
+    margin: 0 0 10px;
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+    color: color-mix(in srgb, var(--surface) 70%, transparent);
+    text-transform: uppercase;
+  }
+
+  .hero-greet {
+    margin: 0;
+    font-family: Georgia, "Noto Serif KR", "Apple SD Gothic Neo", serif;
+    font-weight: 600;
+    font-size: clamp(1.5rem, 3.4vw, 2.15rem);
+    text-wrap: balance;
+    letter-spacing: -0.01em;
+  }
+
+  .hero-meta {
+    margin-top: 20px;
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    flex-wrap: wrap;
+    border-top: 1px solid color-mix(in srgb, var(--surface) 22%, transparent);
+    padding-top: 16px;
+  }
+
+  .clock {
+    font-size: 1.6rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
+  .date-line {
+    margin: 0;
+    font-size: 0.88rem;
+    color: color-mix(in srgb, var(--surface) 76%, transparent);
+  }
+
+  /* ---------- Teams ---------- */
+  .section-label {
+    margin: 40px 0 14px;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  }
+
+  .teams {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  @media (max-width: 620px) {
+    .teams { grid-template-columns: 1fr; }
+  }
+
+  .team-card {
+    position: relative;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 18px 18px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-shadow: var(--shadow);
+  }
+  .team-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 18px;
+    right: 18px;
+    height: 3px;
+    background: var(--spotlight);
+    border-radius: 0 0 3px 3px;
+  }
+
+  .team-head {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .team-num {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--curtain);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 2px 8px;
+    flex-shrink: 0;
+  }
+  .team-name {
+    margin: 0;
+    font-size: 1.02rem;
+    font-weight: 700;
+  }
+  .team-sub {
+    margin: 2px 0 0;
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+  }
+
+  .team-label {
+    font-size: 0.72rem;
+    color: var(--ink-soft);
+    letter-spacing: 0.03em;
+  }
+
+  .team-note {
+    width: 100%;
+    resize: vertical;
+    min-height: 52px;
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 8px 10px;
+    font: inherit;
+    font-size: 0.86rem;
+    color: var(--ink);
+  }
+  .team-note:focus-visible {
+    outline: 2px solid var(--spotlight);
+    outline-offset: 1px;
+  }
+
+  .team-criteria summary {
+    cursor: pointer;
+    font-size: 0.8rem;
+    color: var(--curtain);
+    font-weight: 600;
+  }
+  .team-criteria summary:focus-visible { outline: 2px solid var(--spotlight); border-radius: 4px; }
+  .team-criteria ul {
+    margin: 8px 0 0;
+    padding-left: 18px;
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .team-foot {
+    margin-top: auto;
+    padding-top: 10px;
+    border-top: 1px dashed var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .team-next {
+    font-size: 0.74rem;
+    color: var(--ink-soft);
+  }
+
+  .copy-btn {
+    font: inherit;
+    font-size: 0.76rem;
+    font-weight: 600;
+    color: var(--curtain);
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 5px 12px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .copy-btn:hover { background: var(--surface); border-color: var(--curtain); }
+  .copy-btn:focus-visible { outline: 2px solid var(--spotlight); outline-offset: 1px; }
+  .copy-btn[data-copied="true"] { background: var(--curtain); color: var(--surface); border-color: var(--curtain); }
+
+  /* ---------- Lower: checklist + mood ---------- */
+  .lower {
+    margin-top: 8px;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 14px;
+    align-items: start;
+  }
+  @media (max-width: 700px) {
+    .lower { grid-template-columns: 1fr; }
+  }
+
+  .checklist-panel, .mood-panel > * {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+  }
+  .checklist-panel { padding: 18px 18px 14px; }
+  .checklist-panel h2, .principle-tile h2 {
+    margin: 0 0 12px;
+    font-size: 0.94rem;
+    font-weight: 700;
+  }
+
+  .checklist-form {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  .checklist-form input {
+    flex: 1;
+    font: inherit;
+    font-size: 0.88rem;
+    padding: 8px 10px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--surface-2);
+    color: var(--ink);
+  }
+  .checklist-form input:focus-visible { outline: 2px solid var(--spotlight); outline-offset: 1px; }
+  .checklist-form button {
+    font: inherit;
+    font-size: 0.86rem;
+    font-weight: 600;
+    background: var(--curtain);
+    color: var(--surface);
+    border: none;
+    border-radius: 8px;
+    padding: 0 16px;
+    cursor: pointer;
+  }
+  .checklist-form button:hover { background: var(--curtain-deep); }
+  .checklist-form button:focus-visible { outline: 2px solid var(--spotlight); outline-offset: 2px; }
+
+  .checklist-items {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-height: 32px;
+  }
+  .checklist-items li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 4px;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.88rem;
+  }
+  .checklist-items li:last-child { border-bottom: none; }
+  .checklist-items li.done span.txt {
+    color: var(--ink-soft);
+    text-decoration: line-through;
+  }
+  .checklist-items input[type="checkbox"] {
+    width: 16px; height: 16px; accent-color: var(--curtain); flex-shrink: 0;
+  }
+  .checklist-items .txt { flex: 1; word-break: break-word; }
+  .checklist-items .del-btn {
+    border: none;
+    background: none;
+    color: var(--ink-soft);
+    cursor: pointer;
+    font-size: 0.95rem;
+    line-height: 1;
+    padding: 4px;
+    border-radius: 4px;
+  }
+  .checklist-items .del-btn:hover { color: var(--spotlight); }
+  .checklist-items .del-btn:focus-visible { outline: 2px solid var(--spotlight); }
+  .checklist-empty {
+    color: var(--ink-soft);
+    font-size: 0.84rem;
+    padding: 8px 4px;
+  }
+
+  .mood-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .stat-tile {
+    padding: 16px 18px;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+  }
+  .stat-num {
+    font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+    font-variant-numeric: tabular-nums;
+    font-size: 2.1rem;
+    font-weight: 700;
+    color: var(--spotlight);
+  }
+  .stat-label {
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+  }
+
+  .principle-tile { padding: 18px; }
+  .principle-eyebrow {
+    margin: 0 0 6px;
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  }
+  .principle-name {
+    margin: 0 0 6px;
+    font-family: Georgia, "Noto Serif KR", serif;
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--curtain);
+  }
+  .principle-text {
+    margin: 0;
+    font-size: 0.88rem;
+    color: var(--ink);
+    line-height: 1.55;
+  }
+  .principle-nav {
+    margin-top: 12px;
+    display: flex;
+    gap: 6px;
+  }
+  .principle-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--line);
+    border: none;
+    padding: 0;
+    cursor: pointer;
+  }
+  .principle-dot[aria-current="true"] { background: var(--spotlight); }
+  .principle-dot:focus-visible { outline: 2px solid var(--spotlight); outline-offset: 2px; }
+
+  footer.foot-note {
+    margin-top: 32px;
+    font-size: 0.76rem;
+    color: var(--ink-soft);
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+<div class="stage">
+  <header class="hero">
+    <p class="hero-eyebrow">HAENGBOK WORKSPACE · CALL SHEET</p>
+    <h1 class="hero-greet" id="greeting">행복 워크스페이스가 열렸습니다</h1>
+    <div class="hero-meta">
+      <time class="clock num" id="clock">00:00:00</time>
+      <p class="date-line" id="dateLine"></p>
+    </div>
+  </header>
+
+  <p class="section-label">팀 현황판</p>
+  <section class="teams" aria-label="팀 현황판" id="teamGrid"></section>
+
+  <p class="section-label">오늘</p>
+  <section class="lower">
+    <div class="checklist-panel">
+      <h2>오늘 체크리스트</h2>
+      <form class="checklist-form" id="checklistForm">
+        <input type="text" id="checklistInput" placeholder="할 일을 적고 Enter" aria-label="할 일 추가" autocomplete="off" />
+        <button type="submit">추가</button>
+      </form>
+      <ul class="checklist-items" id="checklistItems"></ul>
+    </div>
+    <div class="mood-panel">
+      <div class="stat-tile">
+        <span class="stat-num num" id="remainingCount">0</span>
+        <span class="stat-label">오늘 남은 할 일</span>
+      </div>
+      <div class="principle-tile">
+        <p class="principle-eyebrow">오늘의 원칙</p>
+        <p class="principle-name" id="principleName"></p>
+        <p class="principle-text" id="principleText"></p>
+        <div class="principle-nav" id="principleNav" role="tablist" aria-label="원칙 넘기기"></div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot-note">입력한 내용은 이 브라우저에만 저장됩니다 (localStorage) · 다른 사람에게 공유되지 않습니다</footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var TEAMS = [
+    {
+      id: "class",
+      num: "01",
+      name: "수업준비팀",
+      sub: "매주 연기 수업",
+      placeholder: "다음 수업 커리큘럼 초안, 사용할 장면/대본, 실습 구조 준비",
+      criteria: [
+        "Stanislavski / Meisner / Chubbuck / Cicely Berry 중 최소 1개 프레임워크에 근거하지 않으면 반려",
+        "“만들어진 목적(objective)”이 아니라 “실제 반응”을 유도하는 구조가 없으면 반려",
+        "3시간/특강 등 시간 단위가 명시 안 되면 반려"
+      ],
+      next: "행복 최종 확인 후 바로 사용",
+      trigger: "수업준비팀으로 다음 주 [대상/레벨] 수업 커리큘럼 짜줘."
+    },
+    {
+      id: "alumni",
+      num: "02",
+      name: "졸업생 커뮤니티 운영팀",
+      sub: "단톡방",
+      placeholder: "단톡방 최근 대화 흐름 정리, 필요한 공지/이벤트 초안",
+      criteria: [
+        "실제 발송·게시 금지 — 초안까지만",
+        "졸업생 개개인 민감한 근황을 요약·기록하지 않는다 (사생활 보호)",
+        "톤: 학원장이 아니라 선배/코치 같은 친밀한 어투"
+      ],
+      next: "행복이 직접 전송",
+      trigger: "졸업생커뮤니티팀으로 이번 주 단톡방 공지 초안 써줘."
+    },
+    {
+      id: "dev",
+      num: "03",
+      name: "개발팀",
+      sub: "배우 이미지 분석 프로그램",
+      placeholder: "기능 개발/디버깅/설계 (MediaPipe, OpenFace, wav2vec 등)",
+      criteria: [
+        "원본 데이터는 코치(행복) 전용 — 외부 유출 경로 설계 금지",
+        "절대 점수(absolute score)가 아니라 개인 내 변화 추적(intra-personal progress) 원칙 유지",
+        "배포/프로덕션 반영 전 반드시 로컬 테스트 결과 첨부"
+      ],
+      next: "행복 검토 후 병합",
+      trigger: "개발팀으로 [기능] 관련 코드 봐줘. 배포 전 테스트 결과까지 정리해줘."
+    },
+    {
+      id: "workshop",
+      num: "04",
+      name: "워크샵 기획·운영팀",
+      sub: "호흡과 발성",
+      placeholder: "워크샵 커리큘럼 개발 또는 다음 회차 운영 준비",
+      criteria: [
+        "드라마테라피 이론적 근거(Moreno, Winnicott, Laban, Rogers 등) 최소 1개 명시 없으면 반려",
+        "실습 순서가 “이론 설명 → 바로 체험”으로 되어 있지 않으면 반려 (설명만 길면 반려)",
+        "회차별 결과물(실습지·체크리스트 등)이 없으면 반려"
+      ],
+      next: "행복 최종 확인",
+      trigger: "워크샵기획팀으로 호흡·발성 워크샵 [N]회차 실습 순서 짜줘."
+    }
+  ];
+
+  var PRINCIPLES = [
+    { name: "Stanislavski", text: "장면을 만드는 건 정해진 목적(objective)이 아니라, 그 목적을 쫓는 동안 일어나는 진짜 반응이다." },
+    { name: "Meisner", text: "대사를 준비하지 말고, 상대가 지금 실제로 하는 행동에 진짜로 반응할 것." },
+    { name: "Chubbuck", text: "인물의 목표는 언제나 ‘나를 지키기 위한 것’에서 출발한다." },
+    { name: "Cicely Berry", text: "목소리를 만들기 전에 숨을 먼저 듣는다 — 호흡은 감정을 담는 그릇이다." },
+    { name: "Moreno", text: "역할을 바꿔보는 순간(role reversal), 보이지 않던 게 보이기 시작한다." },
+    { name: "Winnicott", text: "안전한 공간(holding environment)이 있어야 진짜 놀이가 시작된다." },
+    { name: "Laban", text: "몸의 움직임에는 이미 감정의 질감(effort)이 담겨 있다." },
+    { name: "Rogers", text: "평가 없이 있는 그대로 받아들여질 때(unconditional positive regard) 사람은 비로소 변한다." }
+  ];
+
+  var $ = function (id) { return document.getElementById(id); };
+
+  /* ---- Hero: greeting + clock + date ---- */
+  function greetingFor(hour) {
+    if (hour >= 5 && hour < 12) return "좋은 아침이에요, 행복님";
+    if (hour >= 12 && hour < 17) return "오늘도 화이팅이에요, 행복님";
+    if (hour >= 17 && hour < 22) return "오늘 하루도 고생 많으셨어요, 행복님";
+    return "늦은 시간까지 애쓰시네요, 행복님";
+  }
+
+  function tick() {
+    var now = new Date();
+    $("greeting").textContent = greetingFor(now.getHours());
+    $("clock").textContent = now.toLocaleTimeString("ko-KR", { hour12: false });
+    $("dateLine").textContent = now.toLocaleDateString("ko-KR", {
+      year: "numeric", month: "long", day: "numeric", weekday: "long"
+    });
+  }
+  tick();
+  setInterval(tick, 1000);
+
+  /* ---- Team cards ---- */
+  var teamGrid = $("teamGrid");
+  TEAMS.forEach(function (team) {
+    var card = document.createElement("article");
+    card.className = "team-card";
+
+    var noteKey = "haengbok-note-" + team.id;
+    var savedNote = localStorage.getItem(noteKey) || "";
+
+    var criteriaHtml = team.criteria.map(function (c) {
+      return "<li>" + c + "</li>";
+    }).join("");
+
+    card.innerHTML =
+      '<div class="team-head">' +
+        '<span class="team-num num">' + team.num + '</span>' +
+        '<div><h2 class="team-name">' + team.name + '</h2><p class="team-sub">' + team.sub + '</p></div>' +
+      '</div>' +
+      '<label class="team-label" for="note-' + team.id + '">오늘 할 일</label>' +
+      '<textarea class="team-note" id="note-' + team.id + '" rows="2" placeholder="' + team.placeholder + '"></textarea>' +
+      '<details class="team-criteria"><summary>반려 기준 (' + team.criteria.length + ')</summary><ul>' + criteriaHtml + '</ul></details>' +
+      '<div class="team-foot">' +
+        '<span class="team-next">다음 단계 · ' + team.next + '</span>' +
+        '<button type="button" class="copy-btn" data-trigger="' + team.trigger.replace(/"/g, "&quot;") + '">지시문 복사</button>' +
+      '</div>';
+
+    var textarea = card.querySelector(".team-note");
+    textarea.value = savedNote;
+    textarea.addEventListener("input", function () {
+      localStorage.setItem(noteKey, textarea.value);
+    });
+
+    var copyBtn = card.querySelector(".copy-btn");
+    copyBtn.addEventListener("click", function () {
+      copyText(team.trigger, copyBtn);
+    });
+
+    teamGrid.appendChild(card);
+  });
+
+  function copyText(text, btn) {
+    function done() {
+      var original = btn.textContent;
+      btn.textContent = "복사됨";
+      btn.setAttribute("data-copied", "true");
+      setTimeout(function () {
+        btn.textContent = original;
+        btn.removeAttribute("data-copied");
+      }, 1400);
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(done, function () { fallbackCopy(text, done); });
+    } else {
+      fallbackCopy(text, done);
+    }
+  }
+  function fallbackCopy(text, done) {
+    var ta = document.createElement("textarea");
+    ta.value = text;
+    ta.style.position = "fixed";
+    ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.focus();
+    ta.select();
+    try { document.execCommand("copy"); } catch (e) {}
+    document.body.removeChild(ta);
+    done();
+  }
+
+  /* ---- Checklist ---- */
+  var CHECKLIST_KEY = "haengbok-checklist";
+  var items = [];
+  try { items = JSON.parse(localStorage.getItem(CHECKLIST_KEY)) || []; } catch (e) { items = []; }
+
+  var listEl = $("checklistItems");
+  var remainingEl = $("remainingCount");
+
+  function persist() {
+    localStorage.setItem(CHECKLIST_KEY, JSON.stringify(items));
+  }
+
+  function render() {
+    listEl.innerHTML = "";
+    if (items.length === 0) {
+      var empty = document.createElement("li");
+      empty.className = "checklist-empty";
+      empty.textContent = "아직 추가한 할 일이 없어요.";
+      listEl.appendChild(empty);
+    }
+    items.forEach(function (item) {
+      var li = document.createElement("li");
+      if (item.done) li.className = "done";
+
+      var checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.checked = item.done;
+      checkbox.setAttribute("aria-label", item.text);
+      checkbox.addEventListener("change", function () {
+        item.done = checkbox.checked;
+        persist();
+        render();
+      });
+
+      var span = document.createElement("span");
+      span.className = "txt";
+      span.textContent = item.text;
+
+      var del = document.createElement("button");
+      del.type = "button";
+      del.className = "del-btn";
+      del.setAttribute("aria-label", "삭제: " + item.text);
+      del.textContent = "×";
+      del.addEventListener("click", function () {
+        items = items.filter(function (i) { return i.id !== item.id; });
+        persist();
+        render();
+      });
+
+      li.appendChild(checkbox);
+      li.appendChild(span);
+      li.appendChild(del);
+      listEl.appendChild(li);
+    });
+    remainingEl.textContent = String(items.filter(function (i) { return !i.done; }).length);
+  }
+
+  $("checklistForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var input = $("checklistInput");
+    var text = input.value.trim();
+    if (!text) return;
+    items.push({ id: Date.now() + "-" + Math.random().toString(36).slice(2), text: text, done: false });
+    input.value = "";
+    persist();
+    render();
+  });
+
+  render();
+
+  /* ---- Principle rotator ---- */
+  var principleIndex = 0;
+  var nameEl = $("principleName");
+  var textEl = $("principleText");
+  var navEl = $("principleNav");
+
+  PRINCIPLES.forEach(function (_, i) {
+    var dot = document.createElement("button");
+    dot.type = "button";
+    dot.className = "principle-dot";
+    dot.setAttribute("role", "tab");
+    dot.setAttribute("aria-label", "원칙 " + (i + 1));
+    dot.addEventListener("click", function () { showPrinciple(i); });
+    navEl.appendChild(dot);
+  });
+
+  function showPrinciple(i) {
+    principleIndex = i;
+    var p = PRINCIPLES[i];
+    nameEl.textContent = p.name;
+    textEl.textContent = p.text;
+    Array.prototype.forEach.call(navEl.children, function (dot, idx) {
+      dot.setAttribute("aria-current", idx === i ? "true" : "false");
+    });
+  }
+
+  showPrinciple(Math.floor(new Date().getDate() % PRINCIPLES.length));
+
+  var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!reduceMotion) {
+    setInterval(function () {
+      showPrinciple((principleIndex + 1) % PRINCIPLES.length);
+    }, 12000);
+  }
+})();
+</script>
+</body>
+</html>
