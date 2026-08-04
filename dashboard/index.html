@@ -267,6 +267,166 @@
     line-height: 1.4;
   }
 
+  /* ---------- AI 비서 ---------- */
+  .ai-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 18px;
+    box-shadow: var(--shadow);
+  }
+  .ai-key-desc {
+    margin: 0 0 10px;
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+    line-height: 1.55;
+  }
+  .ai-key-desc a { color: var(--curtain); }
+  .ai-key-row {
+    display: flex;
+    gap: 8px;
+  }
+  .ai-key-row input {
+    flex: 1;
+    font: inherit;
+    font-size: 0.88rem;
+    padding: 8px 10px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--surface-2);
+    color: var(--ink);
+  }
+  .ai-key-row input:focus-visible { outline: 2px solid var(--spotlight); outline-offset: 1px; }
+  .ai-key-row button {
+    font: inherit;
+    font-size: 0.86rem;
+    font-weight: 600;
+    background: var(--curtain);
+    color: var(--surface);
+    border: none;
+    border-radius: 8px;
+    padding: 0 16px;
+    cursor: pointer;
+  }
+  .ai-key-row button:hover { background: var(--curtain-deep); }
+  .ai-key-note {
+    margin: 8px 0 0;
+    font-size: 0.74rem;
+    color: var(--ink-soft);
+  }
+
+  .ai-chat-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+  }
+  .ai-chat-controls select {
+    font: inherit;
+    font-size: 0.84rem;
+    padding: 6px 10px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--surface-2);
+    color: var(--ink);
+  }
+  .ai-change-key-btn {
+    font: inherit;
+    font-size: 0.74rem;
+    color: var(--ink-soft);
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-decoration: underline;
+    padding: 4px;
+  }
+  .ai-change-key-btn:hover { color: var(--curtain); }
+
+  .ai-messages {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-height: 360px;
+    overflow-y: auto;
+    margin-bottom: 12px;
+    padding-right: 2px;
+  }
+  .ai-empty {
+    color: var(--ink-soft);
+    font-size: 0.84rem;
+  }
+  .ai-msg { font-size: 0.88rem; }
+  .ai-msg-role {
+    display: block;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 3px;
+    font-family: "Noto Sans KR", ui-monospace, "SFMono-Regular", Consolas, monospace;
+  }
+  .ai-msg.user { padding: 0 2px; }
+  .ai-msg.user .ai-msg-role { color: var(--ink-soft); }
+  .ai-msg.assistant {
+    background: var(--surface-2);
+    border-radius: 10px;
+    padding: 10px 12px;
+  }
+  .ai-msg.assistant .ai-msg-role { color: var(--curtain); }
+  .ai-msg.error {
+    background: var(--surface-2);
+    border-radius: 10px;
+    padding: 10px 12px;
+    color: var(--spotlight);
+  }
+  .ai-msg.error .ai-msg-role { color: var(--spotlight); }
+  .ai-msg-text {
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: break-word;
+    line-height: 1.55;
+  }
+  .ai-loading {
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+  }
+
+  .ai-form {
+    display: flex;
+    gap: 8px;
+    align-items: flex-end;
+  }
+  .ai-form textarea {
+    flex: 1;
+    resize: vertical;
+    min-height: 44px;
+    font: inherit;
+    font-size: 0.88rem;
+    padding: 8px 10px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--surface-2);
+    color: var(--ink);
+  }
+  .ai-form textarea:focus-visible { outline: 2px solid var(--spotlight); outline-offset: 1px; }
+  .ai-form button {
+    font: inherit;
+    font-size: 0.86rem;
+    font-weight: 600;
+    background: var(--curtain);
+    color: var(--surface);
+    border: none;
+    border-radius: 8px;
+    padding: 0 18px;
+    height: 44px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .ai-form button:hover { background: var(--curtain-deep); }
+  .ai-form button:disabled { opacity: 0.55; cursor: default; }
+
   /* ---------- Live office ---------- */
   .office-card {
     background: var(--surface);
@@ -383,6 +543,26 @@
   .copy-btn:hover { background: var(--surface); border-color: var(--curtain); }
   .copy-btn:focus-visible { outline: 2px solid var(--spotlight); outline-offset: 1px; }
   .copy-btn[data-copied="true"] { background: var(--curtain); color: var(--surface); border-color: var(--curtain); }
+
+  .team-actions {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .ask-ai-btn {
+    font: inherit;
+    font-size: 0.76rem;
+    font-weight: 600;
+    color: var(--surface);
+    background: var(--curtain);
+    border: 1px solid var(--curtain);
+    border-radius: 999px;
+    padding: 5px 12px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .ask-ai-btn:hover { background: var(--curtain-deep); border-color: var(--curtain-deep); }
+  .ask-ai-btn:focus-visible { outline: 2px solid var(--spotlight); outline-offset: 1px; }
 
   /* ---------- Lower: checklist + mood ---------- */
   .lower {
@@ -563,6 +743,36 @@
     </div>
   </header>
 
+  <p class="section-label">AI 비서</p>
+  <div class="ai-card">
+    <div id="aiKeySetup" class="ai-key-setup">
+      <p class="ai-key-desc">
+        AI 비서에게 실제로 일을 시키려면 행복님의 Anthropic API 키가 필요합니다.
+        <a href="https://console.anthropic.com/settings/keys" target="_blank" rel="noopener">console.anthropic.com</a>에서 발급받아 아래에 붙여넣어 주세요.
+        키는 이 브라우저에만 저장되고, 요청할 때마다 Anthropic 서버로 직접 전송됩니다 (다른 곳에는 전송되지 않습니다).
+      </p>
+      <div class="ai-key-row">
+        <input type="password" id="apiKeyInput" placeholder="sk-ant-..." autocomplete="off" />
+        <button type="button" id="apiKeySave">저장</button>
+      </div>
+      <p class="ai-key-note" id="apiKeyStatus"></p>
+    </div>
+    <div id="aiChat" class="ai-chat" hidden>
+      <div class="ai-chat-controls">
+        <select id="aiDeptSelect" aria-label="부서 선택"></select>
+        <button type="button" id="apiKeyChangeBtn" class="ai-change-key-btn">API 키 변경</button>
+      </div>
+      <div class="ai-messages" id="aiMessages">
+        <p class="ai-empty">부서를 고르고(선택), 질문이나 요청을 입력해 보세요. 실제 Claude가 답합니다.</p>
+      </div>
+      <form class="ai-form" id="aiForm">
+        <textarea id="aiInput" rows="2" placeholder="예: 다음 주 초급반 수업 커리큘럼 짜줘" aria-label="AI 비서에게 보낼 메시지"></textarea>
+        <button type="submit" id="aiSendBtn">보내기</button>
+      </form>
+    </div>
+  </div>
+  <p class="office-caption">여기서 나눈 대화는 행복님의 API 키로 Anthropic 서버에 직접 전송됩니다 (이 브라우저 밖으로 나갑니다) · API 사용량만큼 비용이 발생할 수 있습니다</p>
+
   <p class="section-label">실시간 오피스</p>
   <div class="office-card">
     <div class="office-viewport" id="officeViewport">
@@ -599,7 +809,7 @@
     </div>
   </section>
 
-  <footer class="foot-note">입력한 내용은 이 브라우저에만 저장됩니다 (localStorage) · 다른 사람에게 공유되지 않습니다</footer>
+  <footer class="foot-note">체크리스트·메모는 이 브라우저에만 저장됩니다 (localStorage) · AI 비서와 나눈 대화만 Anthropic 서버로 전송됩니다</footer>
 </div>
 
 <script>
@@ -752,7 +962,10 @@
       '<details class="team-criteria"><summary>반려 기준 (' + team.criteria.length + ')</summary><ul>' + criteriaHtml + '</ul></details>' +
       '<div class="team-foot">' +
         '<span class="team-next">다음 단계 · ' + team.next + '</span>' +
-        '<button type="button" class="copy-btn" data-trigger="' + team.trigger.replace(/"/g, "&quot;") + '">지시문 복사</button>' +
+        '<div class="team-actions">' +
+          '<button type="button" class="copy-btn" data-trigger="' + team.trigger.replace(/"/g, "&quot;") + '">지시문 복사</button>' +
+          '<button type="button" class="ask-ai-btn">AI 비서에게 보내기</button>' +
+        '</div>' +
       '</div>';
 
     var textarea = card.querySelector(".team-note");
@@ -764,6 +977,11 @@
     var copyBtn = card.querySelector(".copy-btn");
     copyBtn.addEventListener("click", function () {
       copyText(team.trigger, copyBtn);
+    });
+
+    var askAiBtn = card.querySelector(".ask-ai-btn");
+    askAiBtn.addEventListener("click", function () {
+      askAiAbout(team.id, team.trigger);
     });
 
     teamGrid.appendChild(card);
@@ -1184,6 +1402,196 @@
         setTimeout(hideTooltip, 3000);
       }
     });
+  })();
+
+  /* ---- AI 비서: real Claude chat via the browser ---- */
+  (function () {
+    var API_KEY_STORAGE = "haengbok-anthropic-key";
+    var MODEL = "claude-opus-5";
+
+    var keySetup = $("aiKeySetup");
+    var chatEl = $("aiChat");
+    var keyInput = $("apiKeyInput");
+    var keySaveBtn = $("apiKeySave");
+    var keyStatus = $("apiKeyStatus");
+    var keyChangeBtn = $("apiKeyChangeBtn");
+    var deptSelect = $("aiDeptSelect");
+    var messagesEl = $("aiMessages");
+    var form = $("aiForm");
+    var input = $("aiInput");
+    var sendBtn = $("aiSendBtn");
+
+    var history = [];
+    var busy = false;
+
+    function getKey() {
+      return (localStorage.getItem(API_KEY_STORAGE) || "").trim();
+    }
+
+    function showChat() {
+      keySetup.hidden = true;
+      chatEl.hidden = false;
+    }
+    function showKeySetup() {
+      chatEl.hidden = true;
+      keySetup.hidden = false;
+      keyInput.focus();
+    }
+
+    if (getKey()) {
+      showChat();
+    } else {
+      showKeySetup();
+    }
+
+    deptSelect.innerHTML =
+      '<option value="">부서 선택 안 함 (자유롭게 질문)</option>' +
+      TEAMS.map(function (t) {
+        return '<option value="' + t.id + '">' + t.name + "</option>";
+      }).join("");
+
+    keySaveBtn.addEventListener("click", function () {
+      var val = keyInput.value.trim();
+      if (val.length < 10) {
+        keyStatus.textContent = "키가 너무 짧아요. sk-ant- 로 시작하는 키를 붙여넣어 주세요.";
+        return;
+      }
+      localStorage.setItem(API_KEY_STORAGE, val);
+      keyInput.value = "";
+      keyStatus.textContent = "";
+      showChat();
+    });
+
+    keyChangeBtn.addEventListener("click", function () {
+      showKeySetup();
+    });
+
+    function buildSystemPrompt(deptId) {
+      var parts = [
+        "당신은 '행복 워크스페이스'의 AI 비서입니다. 사용자는 연기 학원을 운영하는 '행복' 원장님입니다.",
+        "아래는 부서별 운영 규칙입니다. 결과물을 만들기 전에 해당 부서의 기준을 스스로 점검하고, 하나라도 충족하지 못하면 결과물을 내놓지 말고 어떤 기준이 부족한지 명시한 뒤 필요한 정보를 되물으세요."
+      ];
+      TEAMS.forEach(function (t) {
+        parts.push(
+          "[" + t.name + "] 담당: " + t.sub +
+          " / 기준: " + t.criteria.join(" · ") +
+          " / 결과물 다음 단계: " + t.next
+        );
+      });
+      if (deptId) {
+        var team = TEAMS.filter(function (t) { return t.id === deptId; })[0];
+        if (team) {
+          parts.push("지금 요청은 특히 [" + team.name + "] 업무입니다. 이 부서의 기준을 우선 적용하세요.");
+        }
+      }
+      parts.push("답변은 한국어로, 실제로 바로 쓸 수 있는 결과물 형태로 작성하세요.");
+      return parts.join("\n\n");
+    }
+
+    function appendMessage(role, text) {
+      var empty = messagesEl.querySelector(".ai-empty");
+      if (empty) empty.remove();
+      var wrap = document.createElement("div");
+      wrap.className = "ai-msg " + role;
+      var roleLabel = role === "user" ? "행복" : role === "assistant" ? "AI 비서" : "오류";
+      var roleEl = document.createElement("span");
+      roleEl.className = "ai-msg-role";
+      roleEl.textContent = roleLabel;
+      var textEl = document.createElement("p");
+      textEl.className = "ai-msg-text";
+      textEl.textContent = text;
+      wrap.appendChild(roleEl);
+      wrap.appendChild(textEl);
+      messagesEl.appendChild(wrap);
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+      return wrap;
+    }
+
+    function describeError(status, body) {
+      var apiMsg = body && body.error && body.error.message;
+      if (status === 401) return "API 키가 올바르지 않습니다. 'API 키 변경'을 눌러 다시 확인해주세요.";
+      if (status === 429) return "요청이 너무 많습니다 (rate limit). 잠시 후 다시 시도해주세요.";
+      if (status === 400) return "요청 오류" + (apiMsg ? ": " + apiMsg : "");
+      return "오류가 발생했습니다 (" + status + ")" + (apiMsg ? ": " + apiMsg : "");
+    }
+
+    function setBusy(isBusy) {
+      busy = isBusy;
+      sendBtn.disabled = isBusy;
+      input.disabled = isBusy;
+    }
+
+    async function sendMessage(text, deptId) {
+      if (busy) return;
+      appendMessage("user", text);
+      history.push({ role: "user", content: text });
+      setBusy(true);
+      var loadingEl = appendMessage("assistant", "생각 중…");
+      loadingEl.classList.add("ai-loading-msg");
+
+      try {
+        var res = await fetch("https://api.anthropic.com/v1/messages", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+            "x-api-key": getKey(),
+            "anthropic-version": "2023-06-01",
+            "anthropic-dangerous-direct-browser-access": "true"
+          },
+          body: JSON.stringify({
+            model: MODEL,
+            max_tokens: 4096,
+            system: buildSystemPrompt(deptId),
+            messages: history
+          })
+        });
+
+        var data = null;
+        try { data = await res.json(); } catch (e) { data = null; }
+
+        if (!res.ok) {
+          loadingEl.remove();
+          appendMessage("error", describeError(res.status, data));
+          history.pop();
+          return;
+        }
+
+        var textBlock = null;
+        if (data && Array.isArray(data.content)) {
+          for (var i = 0; i < data.content.length; i++) {
+            if (data.content[i].type === "text") { textBlock = data.content[i]; break; }
+          }
+        }
+        var replyText = textBlock ? textBlock.text : "(응답에서 텍스트를 찾지 못했습니다)";
+        loadingEl.remove();
+        appendMessage("assistant", replyText);
+        history.push({ role: "assistant", content: replyText });
+      } catch (err) {
+        loadingEl.remove();
+        appendMessage("error", "네트워크 오류로 요청이 실패했습니다. 인터넷 연결과 API 키를 확인해주세요. (" + (err && err.message ? err.message : err) + ")");
+        history.pop();
+      } finally {
+        setBusy(false);
+        input.focus();
+      }
+    }
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var text = input.value.trim();
+      if (!text || busy) return;
+      input.value = "";
+      sendMessage(text, deptSelect.value);
+    });
+
+    window.askAiAbout = function (deptId, prefillText) {
+      showChat();
+      deptSelect.value = deptId;
+      input.value = prefillText;
+      var aiCard = deptSelect.closest(".ai-card");
+      if (aiCard) aiCard.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "center" });
+      input.focus();
+    };
   })();
 })();
 </script>
